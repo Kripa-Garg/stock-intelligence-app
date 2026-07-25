@@ -1,60 +1,35 @@
-\# Stock Market Intelligence System
+# 📈 Stock Market Intelligence System
 
+An end-to-end machine learning system that predicts next-day stock direction for major Indian market assets, explains its predictions with SHAP, and answers natural-language questions about market news through a Retrieval-Augmented Generation (RAG) pipeline — all wrapped in an interactive Streamlit application.
 
+Built as a capstone project simulating the role of a data scientist at a quantitative investment firm.
 
-An end-to-end ML system that predicts next-day stock direction for 5 Indian assets (Sensex, Reliance, TCS, Infosys, HDFC Bank), explains predictions with SHAP, and answers questions about market news using a RAG pipeline.
+---
 
+## 🎯 Overview
 
+This system combines classical ML with modern LLM techniques to deliver a full investment-research workflow:
 
-\## Features
+- **Predict** — Random Forest classifiers forecast next-day UP/DOWN movement for 5 assets
+- **Explain** — SHAP values break down *why* the model made each prediction, both globally and per-prediction
+- **Ask** — A RAG pipeline answers natural-language questions about recent market news, grounded in real retrieved articles
+- **Compare** — Side-by-side performance metrics across all assets
 
-\- Random Forest classifiers trained per asset with time-based train/test splits
+It can answer questions like:
+> *"What is the predicted direction for Reliance tomorrow?"*
+> *"Which stock has the highest accuracy?"*
+> *"Explain why Sensex is predicted to go UP."*
+> *"Compare the performance of TCS and Infosys."*
 
-\- SHAP explainability (global feature importance + per-prediction breakdown)
+---
 
-\- RAG-powered chat using Sentence Transformers, ChromaDB, and Cohere
-
-\- Interactive Streamlit app with Predictions, Chat, and Comparison tabs
-
-
-
-\## Tech Stack
-
-Python, scikit-learn, SHAP, Sentence Transformers, ChromaDB, Cohere, Streamlit, Plotly, yfinance
-
-
-
-\## Setup
-
-1\. Clone this repo
-
-2\. `pip install -r requirements.txt`
-
-3\. Create `.streamlit/secrets.toml` with your own `COHERE\_API\_KEY = "your\_key"`
-
-4\. `streamlit run app.py`
-
-
-
-\## Screenshots
-
-!\[Predictions Tab](screenshots/predictions.png)
-
-!\[Chat Tab](screenshots/chat.png)
-
-!\[Comparison Tab](screenshots/comparison.png)
-
-
-
-\## Key Findings
-
-\- Only the Sensex model showed AUC meaningfully above random (0.548); individual stocks were near or below random, reflecting the difficulty of short-horizon stock prediction from price data alone
-
-\- Threshold tuning based on business costs reduced total cost across all 5 assets
-
-
-
-\## Author
-
-Kripa
-
+## 🏗️ Architecture
+Data Layer → yfinance (5yr price history) + NewsAPI (headlines)
+Feature Engineering → 23 engineered features (returns, moving averages,
+volatility, volume, time-based signals)
+Modeling → Random Forest classifiers, one per asset,
+time-based train/test split (no lookahead bias)
+Explainability → SHAP TreeExplainer (global + per-prediction)
+Retrieval → Sentence Transformers (MiniLM) embeddings → ChromaDB
+Generation → Cohere Command chat model, grounded on retrieved articles
+Interface → Streamlit (3-tab web app)
