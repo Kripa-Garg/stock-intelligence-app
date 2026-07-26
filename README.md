@@ -119,4 +119,5 @@ Run the app:
 ## 👤 Author
 
 **Kripa**
-- Built for the Cambridgeshire Career Academy Capstone Project
+
+Built for the Cambridgeshire Career Academy Capstone Project
