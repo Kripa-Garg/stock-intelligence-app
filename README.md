@@ -1,5 +1,9 @@
 # 📈 Stock Market Intelligence System
 
+# Stock Market Intelligence System
+
+🔗 **Live App:** https://stock-intelligence-app-d6fkqlnbxewaj7n25o89me.streamlit.app/
+
 An end-to-end machine learning system that predicts next-day stock direction for major Indian market assets, explains its predictions with SHAP, and answers natural-language questions about market news through a Retrieval-Augmented Generation (RAG) pipeline, all wrapped in an interactive Streamlit application.
 
 Built as a capstone project simulating the role of a data scientist at a quantitative investment firm.
